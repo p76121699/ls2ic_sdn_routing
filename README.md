@@ -186,8 +186,6 @@ pip install -r requirements.txt
 Use the following commands to generate topologies and traffic matrices:
 
 ```
-conda activate sdn1
-
 python3 prepare_dataset.py --topology 32node --tms 144tm
 python3 prepare_dataset.py --topology 32node --tms 24tm
 python3 prepare_dataset.py --topology geant --tms 24tm
@@ -219,6 +217,9 @@ Typically, updating the username field in the path is sufficient.
 ### 5.3 Training
 
 There is no need to manually activate the conda environment — the program will do this automatically.
+```
+conda deactivate
+```
 
 Run the training script:
 ```
