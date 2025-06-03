@@ -14,7 +14,7 @@ This includes:
 
 2. Controller Output
 During operation, `utils/simple_monitor.py` (the Ryu controller) writes environment-related files here for the agent to read:
-* `net_info.csv`: Encodes current network state.
+* `net_info.csv`: Encode the original network state into the agent state.
 * `paths_metrics.json`: Contains performance metrics such as link delay, throughput, and loss (used as reward signals).
 
 ### Analysis Tools

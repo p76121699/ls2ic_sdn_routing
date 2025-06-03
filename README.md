@@ -201,7 +201,7 @@ Example configuration:
 config = {
     "conda_sh": "/home/username/miniconda3/etc/profile.d/conda.sh",
     "conda_env": "sdn1", # The name of the previously created conda environment
-    "controller_dir": "/home/username/refactor/utils",
+    "controller_dir": "/home/username/ls2ic_sdn_routing/utils",
     "controller_entry": "simple_monitor.py"
 }
 ```
@@ -228,7 +228,11 @@ sudo python3 main.py --env geant --alg ps_dqn_a train
 ```
 #### NOTE: 
 * Algorithms like drisr and ospf do not require training.
+* Algorithms like drisr and ospf do not require training.
 * Training/testing splits are defined in the config files under `config/env`.
+* If your controller subprocess takes longer to start due to a slower machine, the DRL agent subprocess might encounter an error.
+In this case, close all subprocesses and the main program, then re-run main.py.
+Follow the shutdown procedure below to ensure a clean restart.
 * To safely terminate training:
 Step-by-step shutdown:
 
