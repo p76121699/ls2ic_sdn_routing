@@ -228,7 +228,6 @@ sudo python3 main.py --env geant --alg ps_dqn_a train
 ```
 #### NOTE: 
 * Algorithms like drisr and ospf do not require training.
-* Algorithms like drisr and ospf do not require training.
 * Training/testing splits are defined in the config files under `config/env`.
 * If your controller subprocess takes longer to start due to a slower machine, the DRL agent subprocess might encounter an error.
 In this case, close all subprocesses and the main program, then re-run main.py.
