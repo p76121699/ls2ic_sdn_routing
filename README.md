@@ -1,6 +1,25 @@
 # SDN + DRL Setup Guide
 This guide outlines the complete installation and usage steps for setting up an SDN environment using Mininet, Ryu controller, and our custom DRL-based routing solution. The recommended Python version is 3.8.10.
 
+## Project Structure
+
+```
+.
+├── algs/                   # Algorithm implementation files
+├── config/                 # algorithms, Environment and controller configuration files
+├── dataset/                # Topology, traffic matrices, and Link capacity information
+├── loader/                 # Environment and training loaders
+├── results/                # Training and testing logs, models, path records
+├── stats/                  # Scripts for analyzing performance and metrics
+├── utils/                  # Monitoring scripts and Dataset generation script
+├── main.py                 # Unified entry point: build topo, launch controller, and spawn DRL agent
+├── run_drl.py              # Launch DRL agent in training or testing mode
+├── prepare_dataset.py      # Convert topology and traffic files into JSON format
+├── test_single_tm.py       # test script using single traffic matrix
+├── requirements.txt        # Python dependencies
+└── README.md               # This file
+```
+
 ## Table of Contents
 1. Installing Mininet
 2. Creating a Conda Virtual Environment

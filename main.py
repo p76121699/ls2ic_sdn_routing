@@ -14,7 +14,7 @@ def spawn_controller(ctrl_cfg):
         f"source {ctrl_cfg['conda_sh']} && "
         f"conda activate {ctrl_cfg['conda_env']} && "
         f"cd {ctrl_cfg['controller_dir']} && "
-        f"ryu-manager --observe-link {ctrl_cfg['controller_entry']}; exec bash"
+        f"ryu-manager --observe-link {ctrl_cfg['controller_entry']}"
     )
     return _spawn_new_terminal(cmd)
 
@@ -32,7 +32,7 @@ def spawn_drl(merged_cfg, mode):
         f"source {conda_sh} && "
         f"conda activate {conda_env} && "
         f"python {project_root}/run_drl.py "
-        f"--merged_cfg {cfg_path} --mode {mode} ; exec bash"
+        f"--merged_cfg {cfg_path} --mode {mode}"
     )
     return _spawn_new_terminal(cmd)
 
@@ -103,8 +103,10 @@ def main():
     # --- 5. 收尾 -------------------------------------------------------
     print("Training finished, clean up.")
     net.stop()
-    os.killpg(os.getpgid(ctrl_proc.pid), signal.SIGTERM)
-    os.killpg(os.getpgid(drl_proc.pid),  signal.SIGTERM)
+    drl_proc.terminate()
+    drl_proc.wait()
+    ctrl_proc.terminate()
+    ctrl_proc.wait()
 
 if __name__ == "__main__":
     main()

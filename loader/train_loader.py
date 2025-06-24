@@ -203,8 +203,11 @@ def testing(config):
             drl_paths.setdefault(str(i), {})
             for j in range(1, size):
                 if i != j:
-                    chosen_path = action[agent_index]
-                    drl_paths[str(i)][str(j)] = [all_path_list[i][j][chosen_path]]
+                    if config['algs_name'] == 'adaptive_dijkstra':
+                        drl_paths[str(i)][str(j)] = action[i][j]
+                    else:
+                        chosen = action[agent_index]
+                        drl_paths[str(i)][str(j)] = [all_path_list[i][j][chosen]]
                     agent_index += 1
         
         drl_paths_path = f"./results/{config['algs_name']}/drl_paths.json"
@@ -222,7 +225,7 @@ def testing(config):
             avg_delay, avg_packet_loss, avg_throughput, max_link_utilization))
         
         step += 1
-        if step == 30:
+        if step == config.get("test_step", 30):
             return
         
         time_end = time.time()
@@ -280,8 +283,11 @@ def testing_anime(config):
             drl_paths.setdefault(str(i), {})
             for j in range(1, size):
                 if i != j:
-                    chosen_path = action[agent_index]
-                    drl_paths[str(i)][str(j)] = [all_path_list[i][j][chosen_path]]
+                    if config['algs_name'] == 'adaptive_dijkstra':
+                        drl_paths[str(i)][str(j)] = action[i][j]
+                    else:
+                        chosen = action[agent_index]
+                        drl_paths[str(i)][str(j)] = [all_path_list[i][j][chosen]]
                     agent_index += 1
         
         drl_paths_path = f"./results/{config['algs_name']}/drl_paths.json"
@@ -379,8 +385,11 @@ def loop_pairs(config, size, action, step,
                 r_delay += all_reward_indicator[str(i)][str(j)][action_memory[idx]][1]
                 r_loss  += all_reward_indicator[str(i)][str(j)][action_memory[idx]][2]
 
-            chosen = action[idx]
-            drl_paths[str(i)][str(j)] = [all_path_list[i][j][chosen]]
+            if config['algs_name'] == 'adaptive_dijkstra':
+                drl_paths[str(i)][str(j)] = action[i][j]
+            else:
+                chosen = action[idx]
+                drl_paths[str(i)][str(j)] = [all_path_list[i][j][chosen]]
             idx += 1
             
     return (r_sum, r_bwd, r_delay, r_loss,
